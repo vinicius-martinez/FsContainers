@@ -451,3 +451,5 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   docker container rm $(docker container ls -aq)
   docker rmi $(docker images -a -q) --force
   ```
+
+  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
