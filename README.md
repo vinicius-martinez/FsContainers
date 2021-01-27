@@ -14,8 +14,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 3. [Docker - Recursos](#workshop-docker-resource)
 4. [Docker - Detalhes](#workshop-docker-details)
 5. [Docker - Executando Containers](#workshop-docker-running)
-6. [Docker - Acesso "Remoto"](#workshop-docker-remote)
-7. [Docker - Accesso Externo](#workshop-docker-externalaccess)
+6. [Docker - Accesso Externo](#workshop-docker-externalaccess)
+7. [Docker - Acesso "Remoto"](#workshop-docker-remote)
 8. [Docker - Persistência](#workshop-docker-persistence)
 9. [Docker - Criando Imagens - Commit](#workshop-docker-imagecreation-commit)
 10. [Docker - Criando Imagens - DockerFile](#workshop-docker-imagecreation-dockerfile)
@@ -97,26 +97,28 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   / # uname -a
   Linux 407aedb085f1 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 Linux
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker run -it centos bash`
   ```
   [root@fe3303373936 /]# uname -a
   Linux fe3303373936 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker run -it fedora bash`
   ```
   [root@7bda5c8d4338 /]# uname -a
   Linux 7bda5c8d4338 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker run -it debian bash`
   ```
   root@dfb6141efd67:/# uname -a
   Linux dfb6141efd67 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 GNU/Linux
   ```
-
-  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
 ### 2 - Docker - Hostname <a name="workshop-docker-hostname">
 
@@ -126,7 +128,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   78b5decfc3d6e172e049f4e6404ae9ed2980b355aaa03190c87e69610f73862e
   4b081ec8c88b5395f29c31cd7fd98b6832d36b783ff996745a57d1c5574d64cb
   ```
-  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
 ### 3 - Docker - Recursos <a name="workshop-docker-resource">
 
@@ -140,6 +142,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   a9218409c709   upbeat_visvesvaraya    0.00%     476KiB / 9.735GiB   0.00%     1.1kB / 0B    0B / 0B     2
   9efcbed40973   agitated_snyder        0.10%     616KiB / 9.735GiB   0.01%     1.19kB / 0B   0B / 0B     2
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker top $CONTAINER_ID`
   ```
@@ -147,14 +150,14 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   root                3258                3232                0                   18:09               ?                   00:00:00            /bin/sh -c while true; do echo Hello from Linux container [$HOSTNAME];sleep 3;done
   root                7515                3258                0                   18:28               ?                   00:00:00            sleep 3
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker stats $CONTAINER_ID`
   ```
   CONTAINER ID   NAME                 CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
   4b081ec8c88b   wonderful_dijkstra   0.00%     500KiB / 9.735GiB   0.00%     1.08kB / 0B   0B / 0B     2
   ```
-
-  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
 ### 4 - Docker - Detalhes <a name="workshop-docker-details">
 
@@ -370,17 +373,20 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   HOSTNAME: e1bb8d1a88f2
   HOSTNAME: e1bb8d1a88f2
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker run -d viniciusmartinez/echo-hostname:1.0`
   ```
   249a8345b2f9bab8c47de21cd9de4ba6ef8d155e467b86f1675799c97e02b772
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker ps`
   ```
   CONTAINER ID   IMAGE                                COMMAND               CREATED              STATUS              PORTS     NAMES
   249a8345b2f9   viniciusmartinez/echo-hostname:1.0   "sh /echo_hostname"   About a minute ago   Up About a minute             priceless_elion
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker logs $CONTAINER_ID`
   ```
@@ -392,11 +398,13 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   HOSTNAME: 249a8345b2f9
   HOSTNAME: 249a8345b2f9
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker pause $CONTAINER_ID`
   ```
   sem output no log
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker unpause $CONTAINER_ID`
   ```
@@ -408,6 +416,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   HOSTNAME: 249a8345b2f9
   HOSTNAME: 249a8345b2f9
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker unpause $CONTAINER_ID`
   ```
@@ -419,11 +428,13 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   HOSTNAME: 249a8345b2f9
   HOSTNAME: 249a8345b2f9
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker stop $CONTAINER_ID`
   ```
   249a8345b2f9
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe:
   ```
@@ -433,11 +444,13 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   CONTAINER ID   IMAGE                                COMMAND               CREATED         STATUS         PORTS     NAMES
   27fe9eed1b7c   viniciusmartinez/echo-hostname:1.0   "sh /echo_hostname"   5 seconds ago   Up 5 seconds             serene_pasteur
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe: `docker kill 27fe9eed1b7c`
   ```
   27fe9eed1b7c
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe:
   ```
@@ -445,11 +458,39 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 
   docker container stop $(docker container ls -aq)
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   Sintaxe:
   ```
   docker container rm $(docker container ls -aq)
   docker rmi $(docker images -a -q) --force
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+### 6 - Docker - Acesso Externo <a name="workshop-docker-externalaccess">
+
+  Sintaxe:
+  ```
+  docker run -it httpd:2.4.46
+
+  http :80
+  http: error: ConnectionError: HTTPConnectionPool(host='localhost', port=80): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1107af7c0>: Failed to establish a new connection: [Errno 61] Connection refused')) while doing a GET request to URL: http://localhost:80/
+  ```
+
+  ```
+  docker run -it -p 8080:80 httpd:2.4.46
+
+  http :8080
+  HTTP/1.1 200 OK
+  Accept-Ranges: bytes
+  Connection: Keep-Alive
+  Content-Length: 45
+  Content-Type: text/html
+  Date: Wed, 27 Jan 2021 22:41:55 GMT
+  ETag: "2d-432a5e4a73a80"
+  Keep-Alive: timeout=5, max=100
+  Last-Modified: Mon, 11 Jun 2007 18:53:14 GMT
+  Server: Apache/2.4.46 (Unix)
+
+  <html><body><h1>It works!</h1></body></html>
+  ```
