@@ -1,0 +1,3 @@
+#!/bin/bash
+
+while true; do echo "HOSTNAME: $HOSTNAME"; sleep 2; done

@@ -1,0 +1,4 @@
+FROM alpine:3.13.0
+
+COPY docker/echohostname.v1/echo_hostname /
+ENTRYPOINT ["sh","/echo_hostname"]

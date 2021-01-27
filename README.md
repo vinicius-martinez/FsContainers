@@ -1,6 +1,6 @@
-# Containers & Kubernetes
+# Containers
 
-Neste repositório estarão disponíveis nosso *Workshop* de implementação fazendo uso de [Docker](https://www.docker.com/) e [Kubernetes](https://kubernetes.io/)
+Neste repositório estarão disponíveis nosso *Workshop* de implementação fazendo uso da tecnologia [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/)
 
 ## Pré Requisitos
 
@@ -13,13 +13,14 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 2. [Docker - Hostname](#workshop-docker-hostname)
 3. [Docker - Recursos](#workshop-docker-resource)
 4. [Docker - Detalhes](#workshop-docker-details)
-5. [Docker - Acesso "Remoto"](#workshop-docker-remote)
-6. [Docker - Accesso Externo](#workshop-docker-externalaccess)
-7. [Docker - Persistência](#workshop-docker-persistence)
-8. [Docker - Criando Imagens - Commit](#workshop-docker-imagecreation-commit)
-9. [Docker - Criando Imagens - DockerFile](#workshop-docker-imagecreation-dockerfile)
-10. [Docker - Tag](#workshop-docker-tag)
-11. [Docker - Registro de Containers](#workshop-docker-registry)
+5. [Docker - Executando Containers](#workshop-docker-running)
+6. [Docker - Acesso "Remoto"](#workshop-docker-remote)
+7. [Docker - Accesso Externo](#workshop-docker-externalaccess)
+8. [Docker - Persistência](#workshop-docker-persistence)
+9. [Docker - Criando Imagens - Commit](#workshop-docker-imagecreation-commit)
+10. [Docker - Criando Imagens - DockerFile](#workshop-docker-imagecreation-dockerfile)
+11. [Docker - Tag](#workshop-docker-tag)
+12. [Docker - Registro de Containers](#workshop-docker-registry)
 
 ## Implementação
 
@@ -357,3 +358,96 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ]
   ```
   * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 5 - Docker - Executando Containers <a name="workshop-docker-running">
+
+  Sintaxe: `docker run -it viniciusmartinez/echo-hostname:1.0`
+  ```
+  HOSTNAME: e1bb8d1a88f2
+  HOSTNAME: e1bb8d1a88f2
+  HOSTNAME: e1bb8d1a88f2
+  HOSTNAME: e1bb8d1a88f2
+  HOSTNAME: e1bb8d1a88f2
+  HOSTNAME: e1bb8d1a88f2
+  ```
+
+  Sintaxe: `docker run -d viniciusmartinez/echo-hostname:1.0`
+  ```
+  249a8345b2f9bab8c47de21cd9de4ba6ef8d155e467b86f1675799c97e02b772
+  ```
+
+  Sintaxe: `docker ps`
+  ```
+  CONTAINER ID   IMAGE                                COMMAND               CREATED              STATUS              PORTS     NAMES
+  249a8345b2f9   viniciusmartinez/echo-hostname:1.0   "sh /echo_hostname"   About a minute ago   Up About a minute             priceless_elion
+  ```
+
+  Sintaxe: `docker logs $CONTAINER_ID`
+  ```
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  ```
+
+  Sintaxe: `docker pause $CONTAINER_ID`
+  ```
+  sem output no log
+  ```
+
+  Sintaxe: `docker unpause $CONTAINER_ID`
+  ```
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  ```
+
+  Sintaxe: `docker unpause $CONTAINER_ID`
+  ```
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  HOSTNAME: 249a8345b2f9
+  ```
+
+  Sintaxe: `docker stop $CONTAINER_ID`
+  ```
+  249a8345b2f9
+  ```
+
+  Sintaxe:
+  ```
+  docker run -it viniciusmartinez/echo-hostname:1.0
+
+  docker ps
+  CONTAINER ID   IMAGE                                COMMAND               CREATED         STATUS         PORTS     NAMES
+  27fe9eed1b7c   viniciusmartinez/echo-hostname:1.0   "sh /echo_hostname"   5 seconds ago   Up 5 seconds             serene_pasteur
+  ```
+
+  Sintaxe: `docker kill 27fe9eed1b7c`
+  ```
+  27fe9eed1b7c
+  ```
+
+  Sintaxe:
+  ```
+  docker run -it viniciusmartinez/echo-hostname:1.0
+
+  docker container stop $(docker container ls -aq)
+  ```
+
+  Sintaxe:
+  ```
+  docker container rm $(docker container ls -aq)
+  docker rmi $(docker images -a -q) --force
+  ```
