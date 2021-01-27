@@ -27,9 +27,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 
   Sintaxe: `docker info`
 
-  Output:
   ```
-  ~/Documents/IMPACTA/2021/FullStack/MicroservicesServeless/FsContainers(master*) » docker info                                                   
   Client:
    Context:    default
    Debug Mode: false
