@@ -18,8 +18,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 7. [Docker - Persistência](#workshop-docker-persistence)
 8. [Docker - Criando Imagens - Commit](#workshop-docker-imagecreation-commit)
 9. [Docker - Criando Imagens - DockerFile](#workshop-docker-imagecreation-dockerfile)
-10. [Docker - Registro de Containers](#workshop-docker-registry)
-
+10. [Docker - Tag](#workshop-docker-tag)
+11. [Docker - Registro de Containers](#workshop-docker-registry)
 
 ## Implementação
 
@@ -90,3 +90,27 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   * o *output* deve variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente
 
 ### 1 - Docker - Kernel <a name="workshop-docker-kernel">
+
+  Sintaxe: `docker run -it alpine`
+  ```
+  / # uname -a
+  Linux 407aedb085f1 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 Linux
+  ```
+
+  Sintaxe: `docker run -it centos bash`
+  ```
+  [root@fe3303373936 /]# uname -a
+  Linux fe3303373936 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+  ```
+
+  Sintaxe: `docker run -it fedora bash`
+  ```
+  [root@7bda5c8d4338 /]# uname -a
+  Linux 7bda5c8d4338 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+  ```
+
+  Sintaxe: `docker run -it debian bash`
+  ```
+  root@dfb6141efd67:/# uname -a
+  Linux dfb6141efd67 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 GNU/Linux
+  ```
