@@ -115,6 +115,8 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   Linux dfb6141efd67 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 GNU/Linux
   ```
 
+  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
 ### 2 - Docker - Hostname <a name="workshop-docker-hostname">
 
   Sintaxe: `for i in `seq 3`; do docker run -d busybox /bin/sh -c "while true; do echo Hello from Linux container [\$HOSTNAME];sleep $i;done"; done`
@@ -123,6 +125,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   78b5decfc3d6e172e049f4e6404ae9ed2980b355aaa03190c87e69610f73862e
   4b081ec8c88b5395f29c31cd7fd98b6832d36b783ff996745a57d1c5574d64cb
   ```
+  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
 ### 3 - Docker - Recursos <a name="workshop-docker-resource">
 
@@ -137,15 +140,220 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   9efcbed40973   agitated_snyder        0.10%     616KiB / 9.735GiB   0.01%     1.19kB / 0B   0B / 0B     2
   ```
 
-  Sintaxe: `docker top $CONTAINER ID`
+  Sintaxe: `docker top $CONTAINER_ID`
   ```
   UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
   root                3258                3232                0                   18:09               ?                   00:00:00            /bin/sh -c while true; do echo Hello from Linux container [$HOSTNAME];sleep 3;done
   root                7515                3258                0                   18:28               ?                   00:00:00            sleep 3
   ```
 
-  Sintaxe: `docker stats $CONTAINER ID`
+  Sintaxe: `docker stats $CONTAINER_ID`
   ```
   CONTAINER ID   NAME                 CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
   4b081ec8c88b   wonderful_dijkstra   0.00%     500KiB / 9.735GiB   0.00%     1.08kB / 0B   0B / 0B     2
   ```
+
+  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 4 - Docker - Detalhes <a name="workshop-docker-details">
+
+  Sintaxe: `docker inspect $CONTAINER_ID`
+  ```
+  [
+    {
+        "Id": "225241332ebb10752c1e47257020b137372d11054dba40172fcfbb3ab0c275d2",
+        "Created": "2021-01-27T19:11:24.9247276Z",
+        "Path": "bash",
+        "Args": [],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 9071,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2021-01-27T19:11:25.2920129Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:e7d08cddf791fe3245267654331eb21b805458b3412d368018009355855044a3",
+        "ResolvConfPath": "/var/lib/docker/containers/225241332ebb10752c1e47257020b137372d11054dba40172fcfbb3ab0c275d2/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/225241332ebb10752c1e47257020b137372d11054dba40172fcfbb3ab0c275d2/hostname",
+        "HostsPath": "/var/lib/docker/containers/225241332ebb10752c1e47257020b137372d11054dba40172fcfbb3ab0c275d2/hosts",
+        "LogPath": "/var/lib/docker/containers/225241332ebb10752c1e47257020b137372d11054dba40172fcfbb3ab0c275d2/225241332ebb10752c1e47257020b137372d11054dba40172fcfbb3ab0c275d2-json.log",
+        "Name": "/gallant_knuth",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "KernelMemory": 0,
+            "KernelMemoryTCP": 0,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/5ed0260a1084405546ae1e381c804f3feaa81fbc198774ff711b7141e2be6f04-init/diff:/var/lib/docker/overlay2/008b9adee20e15c7545094a5fb25542dbb9c18ec4bc6f22332d65dce91b5a64c/diff",
+                "MergedDir": "/var/lib/docker/overlay2/5ed0260a1084405546ae1e381c804f3feaa81fbc198774ff711b7141e2be6f04/merged",
+                "UpperDir": "/var/lib/docker/overlay2/5ed0260a1084405546ae1e381c804f3feaa81fbc198774ff711b7141e2be6f04/diff",
+                "WorkDir": "/var/lib/docker/overlay2/5ed0260a1084405546ae1e381c804f3feaa81fbc198774ff711b7141e2be6f04/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "225241332ebb",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": true,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": true,
+            "OpenStdin": true,
+            "StdinOnce": true,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "bash"
+            ],
+            "Image": "debian",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {}
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "478efa7ab6a58743ff477548bf6e31e159635f56c9daf4cfa6df5f2205b0e875",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/478efa7ab6a5",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "bd19c90e375158d676b9a6f008171880b3476f8d72da6450ac6d7ce703247c82",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "f26c4e5a49182e1034db912d4bf3505ff4f8f01a3d9b22ad7d13da0c8bf3d0d6",
+                    "EndpointID": "bd19c90e375158d676b9a6f008171880b3476f8d72da6450ac6d7ce703247c82",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                  }
+              }
+          }
+      }
+  ]
+  ```
+  * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
