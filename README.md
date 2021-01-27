@@ -114,3 +114,38 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   root@dfb6141efd67:/# uname -a
   Linux dfb6141efd67 4.19.121-linuxkit #1 SMP Tue Dec 1 17:50:32 UTC 2020 x86_64 GNU/Linux
   ```
+
+### 2 - Docker - Hostname <a name="workshop-docker-hostname">
+
+  Sintaxe: `for i in `seq 3`; do docker run -d busybox /bin/sh -c "while true; do echo Hello from Linux container [\$HOSTNAME];sleep $i;done"; done`
+  ```
+  0fe0b438f83a41dd8b296895362d31d70dc5f518384082482b428ad499b3dcbb
+  78b5decfc3d6e172e049f4e6404ae9ed2980b355aaa03190c87e69610f73862e
+  4b081ec8c88b5395f29c31cd7fd98b6832d36b783ff996745a57d1c5574d64cb
+  ```
+
+### 3 - Docker - Recursos <a name="workshop-docker-resource">
+
+  Sintaxe: `docker stats`
+  ```
+  CONTAINER ID   NAME                   CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
+  4b081ec8c88b   wonderful_dijkstra     0.00%     468KiB / 9.735GiB   0.00%     1.01kB / 0B   0B / 0B     2
+  78b5decfc3d6   clever_curran          0.10%     532KiB / 9.735GiB   0.01%     1.01kB / 0B   0B / 0B     2
+  0fe0b438f83a   priceless_kowalevski   0.07%     564KiB / 9.735GiB   0.01%     1.01kB / 0B   0B / 0B     2
+  39e9f1a02d42   pedantic_ardinghelli   0.07%     580KiB / 9.735GiB   0.01%     1.01kB / 0B   0B / 0B     2
+  a9218409c709   upbeat_visvesvaraya    0.00%     476KiB / 9.735GiB   0.00%     1.1kB / 0B    0B / 0B     2
+  9efcbed40973   agitated_snyder        0.10%     616KiB / 9.735GiB   0.01%     1.19kB / 0B   0B / 0B     2
+  ```
+
+  Sintaxe: `docker top $CONTAINER ID`
+  ```
+  UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+  root                3258                3232                0                   18:09               ?                   00:00:00            /bin/sh -c while true; do echo Hello from Linux container [$HOSTNAME];sleep 3;done
+  root                7515                3258                0                   18:28               ?                   00:00:00            sleep 3
+  ```
+
+  Sintaxe: `docker stats $CONTAINER ID`
+  ```
+  CONTAINER ID   NAME                 CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
+  4b081ec8c88b   wonderful_dijkstra   0.00%     500KiB / 9.735GiB   0.00%     1.08kB / 0B   0B / 0B     2
+  ```
