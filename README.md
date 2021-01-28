@@ -497,7 +497,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-### 7. Docker - Acesso "Remoto" <a name="#workshop-docker-remote">
+### 7. Docker - Acesso "Remoto" <a name="workshop-docker-remote">
 
   Sintaxe:
   ```
@@ -511,7 +511,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-### 8. Docker - Persistência <a name="#workshop-docker-persistence">
+### 8. Docker - Persistência <a name="workshop-docker-persistence">
 
   Sintaxe:
   ```
@@ -559,7 +559,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-### 9. Docker - Criando Imagens - Commit <a name="#workshop-docker-imagecreation-commit">
+### 9. Docker - Criando Imagens - Commit <a name="workshop-docker-imagecreation-commit">
 
   ```
   docker run -it -p 8080:80 httpd:2.4.46
@@ -602,7 +602,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-### 10. Docker - Criando Imagens - DockerFile <a name="#workshop-docker-imagecreation-dockerfile">
+### 10. Docker - Criando Imagens - DockerFile <a name="workshop-docker-imagecreation-dockerfile">
 
   Sintaxe:
   ```
@@ -625,7 +625,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-### 11. Docker - Tag <a name="#workshop-docker-tag">
+### 11. Docker - Tag <a name="workshop-docker-tag">
 
   Sintaxe: `docker tag viniciusmartinez/my-custom-httpd:2.0 impacta/custom-http:1.0`
   ```
@@ -638,7 +638,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-### 12. Docker - Container Registry <a name="#workshop-docker-registry">
+### 12. Docker - Container Registry <a name="workshop-docker-registry">
 
   Sintaxe:
   ```
