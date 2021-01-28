@@ -1,0 +1,12 @@
+FROM adoptopenjdk/openjdk11:ubi
+# Building
+# mvn package -f source/crebito-api-v1/credito -DskipTests
+# docker build -f docker/Dockerfile.credito-api.v1 -t viniciusmartinez/fscontainers-credito-api:1.0  --build-arg JAR_FILE="source/crebito-api-v1/credito/target/credito-0.0.1-SNAPSHOT.jar" .
+# Running
+# docker run -it -p 8081:8081 viniciusmartinez/fscontainers-credito-api:1.0
+# docker run -it -p 8081:8081 --name credito --net saldoextrato viniciusmartinez/fscontainers-credito-api:1.0
+ARG JAR_FILE
+RUN mkdir /opt/app
+COPY ${JAR_FILE} /opt/app
+EXPOSE 8081
+CMD ["java", "-jar", "/opt/app/credito-0.0.1-SNAPSHOT.jar"]

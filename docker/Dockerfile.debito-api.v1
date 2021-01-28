@@ -1,0 +1,12 @@
+FROM adoptopenjdk/openjdk11:ubi
+# Building
+# mvn package -f source/debito-api-v1/debito -DskipTests
+# docker build -f docker/Dockerfile.debito-api.v1 -t viniciusmartinez/fscontainers-debito-api:1.0  --build-arg JAR_FILE="source/debito-api-v1/debito/target/debito-0.0.1-SNAPSHOT.jar" .
+# Running
+# docker run -it -p 8082:8082 viniciusmartinez/fscontainers-debito-api:1.0
+# docker run -it -p 8082:8082 --name debito --net saldoextrato viniciusmartinez/fscontainers-debito-api:1.0
+ARG JAR_FILE
+RUN mkdir /opt/app
+COPY ${JAR_FILE} /opt/app
+EXPOSE 8082
+CMD ["java", "-jar", "/opt/app/debito-0.0.1-SNAPSHOT.jar"]

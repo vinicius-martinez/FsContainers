@@ -1,0 +1,13 @@
+FROM adoptopenjdk/openjdk11:ubi
+# Building
+# mvn package -f source/saldoextrato-api-v1/saldoextrato -DskipTests
+# docker build -f docker/Dockerfile.saldoextrato-api.v1 -t viniciusmartinez/fscontainers-saldoextrato-api:1.0  --build-arg JAR_FILE="source/saldoextrato-api-v1/saldoextrato/target/saldoextrato-0.0.1-SNAPSHOT.jar" .
+# Running
+# docker run -it -p 8080:8080 viniciusmartinez/fscontainers-saldoextrato-api:1.0
+# docker run -it -p 8080:8080 -e CREDITO_URL=http://credito:8081/api/v1/credito -e DEBITO_URL=http://debito:8082/api/v1/debito viniciusmartinez/fscontainers-saldoextrato-api:1.0
+# docker run -it -p 8080:8080 -e CREDITO_URL=http://credito:8081/api/v1/credito -e DEBITO_URL=http://debito:8082/api/v1/debito --name saldoextrato --net saldoextrato viniciusmartinez/fscontainers-saldoextrato-api:1.0
+ARG JAR_FILE
+RUN mkdir /opt/app
+COPY ${JAR_FILE} /opt/app
+EXPOSE 8080
+CMD ["java", "-jar", "/opt/app/saldoextrato-0.0.1-SNAPSHOT.jar"]

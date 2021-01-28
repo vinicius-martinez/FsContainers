@@ -1,0 +1,26 @@
+version: "3.9"
+
+# docker-compose -f docker/DockerCompose.saldoextrato-api.v1 up
+
+services:
+
+  credito:
+    image: viniciusmartinez/fscontainers-credito-api:1.0
+    ports:
+      - "8081:8081"
+
+  debito:
+    image: viniciusmartinez/fscontainers-debito-api:1.0
+    ports:
+      - "8082:8082"
+
+  saldoextrato:
+    image: viniciusmartinez/fscontainers-saldoextrato-api:1.0
+    ports:
+      - "8080:8080"
+    depends_on:
+      - credito
+      - debito
+    environment:
+      CREDITO_URL: http://credito:8081/api/v1/credito
+      DEBITO_URL: http://debito:8082/api/v1/debito

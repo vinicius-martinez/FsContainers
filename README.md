@@ -21,6 +21,9 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 10. [Docker - Criando Imagens - DockerFile](#workshop-docker-imagecreation-dockerfile)
 11. [Docker - Tag](#workshop-docker-tag)
 12. [Docker - Container Registry](#workshop-docker-registry)
+13. [Docker - SaldoExtrato](#workshop-docker-saldoextrato)
+14. [Docker Compose - SaldoExtrato](#workshop-dockercompose-saldoextrato)
+15. [Docker Compose - Logs](#workshop-dockercompose-logs)
 
 ## Implementação
 
@@ -642,7 +645,157 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 
   Sintaxe:
   ```
-  docker login -u LOGIN -p PASSWORD
+  docker login
   docker push $repository/my-custom-httpd:2.0
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 13. Docker - SaldoExtrato <a name="workshop-docker-saldoextrato">
+
+  Sintaxe:
+  ```
+  docker run -it -p 8081:8081 viniciusmartinez/fscontainers-credito-api:1.0
+
+  docker run -it -p 8082:8082 viniciusmartinez/fscontainers-debito-api:1.0
+
+  docker run -it -p 8080:8080 viniciusmartinez/fscontainers-saldoextrato-api:1.0
+
+  http :8080/api/v1/saldoextrato
+
+  2021-01-28 03:39:07.940 ERROR 1 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:8081/api/v1/credito": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)] with root cause
+
+  java.net.ConnectException: Connection refused (Connection refused)
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as  características do seu ambiente e/ou versão da imagem
+
+  ```
+  docker run -it -p 8081:8081 viniciusmartinez/fscontainers-credito-api:1.0
+
+  docker run -it -p 8082:8082 viniciusmartinez/fscontainers-debito-api:1.0
+
+  docker run -it -p 8080:8080 -e CREDITO_URL=http://credito:8081/api/v1/credito -e DEBITO_URL=http://debito:8082/api/v1/debito viniciusmartinez/fscontainers-saldoextrato-api:1.0
+
+
+  http :8080/api/v1/saldoextrato
+
+  2021-01-28 03:40:28.222 ERROR 1 --- [nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://credito:8081/api/v1/credito": credito; nested exception is java.net.UnknownHostException: credito] with root cause
+
+  java.net.UnknownHostException: credito
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as  características do seu ambiente e/ou versão da imagem
+
+  ```
+  docker network create saldoextrato
+  docker network ls
+
+  docker run -it -p 8081:8081 --name credito --net saldoextrato viniciusmartinez/fscontainers-credito-api:1.0
+
+  docker run -it -p 8082:8082 --name debito --net saldoextrato viniciusmartinez/fscontainers-debito-api:1.0
+
+  docker run -it -p 8080:8080 -e CREDITO_URL=http://credito:8081/api/v1/credito -e DEBITO_URL=http://debito:8082/api/v1/debito --name saldoextrato --net saldoextrato viniciusmartinez/fscontainers-saldoextrato-api:1.0
+
+  http :8080/api/v1/saldoextrato
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Thu, 28 Jan 2021 03:49:25 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "creditoList": [
+          {
+              "credito": 9.9
+          },
+          {
+              "credito": 2.0
+          },
+          {
+              "credito": 8.4
+          },
+          {
+              "credito": 6.1
+          }
+      ],
+      "debitoList": [
+          {
+              "debito": -4.0
+          },
+          {
+              "debito": -3.5
+          },
+          {
+              "debito": -2.3
+          },
+          {
+              "debito": -1.7
+          },
+          {
+              "debito": -7.7
+          },
+          {
+              "debito": -9.3
+          },
+          {
+              "debito": -8.0
+          },
+          {
+              "debito": -9.4
+          },
+          {
+              "debito": -4.8
+          }
+      ],
+      "saldo": -24.3
+  }
+
+  docker container stop $(docker container ls -aq)
+  docker network remove saldoextrato
+  ```
+
+### 14. Docker Compose - SaldoExtrato <a name="workshop-dockercompose-saldoextrato">
+
+  Sintaxe: `docker-compose -f docker/DockerCompose.saldoextrato-api.v1 up`
+
+  ```
+  http :8080/api/v1/saldoextrato
+  HTTP/1.1 200
+  Connection: keep-alive
+  Content-Type: application/json
+  Date: Thu, 28 Jan 2021 03:57:29 GMT
+  Keep-Alive: timeout=60
+  Transfer-Encoding: chunked
+
+  {
+      "creditoList": [
+          {
+              "credito": 4.3
+          },
+          {
+              "credito": 5.4
+          }
+      ],
+      "debitoList": [
+          {
+              "debito": -9.7
+          },
+          {
+              "debito": -5.6
+          },
+          {
+              "debito": -6.8
+          }
+      ],
+      "saldo": -12.4
+  }
+  ```
+
+### 15. Docker Compose - Logs <a name="workshop-dockercompose-logs">
+
+  Sintaxe: `docker-compose -f docker/DockerCompose.saldoextrato-api.v1 up`
+
+  ```
+  docker-compose -f docker/DockerCompose.saldoextrato-api.v1 logs -f credito
+  docker-compose -f docker/DockerCompose.saldoextrato-api.v1 logs -f debito
+  docker-compose -f docker/DockerCompose.saldoextrato-api.v1 logs -f saldoextrato
+  ```
