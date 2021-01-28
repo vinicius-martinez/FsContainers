@@ -1,0 +1,7 @@
+FROM httpd:2.4.46
+
+LABEL maintainer="somename@home.org.au"
+
+RUN apt-get update && apt-get install -y vim
+COPY docker/my-custom-httpd.v2/httpd.conf /usr/local/apache2/conf/httpd.conf
+EXPOSE 9090

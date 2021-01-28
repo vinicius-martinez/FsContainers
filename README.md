@@ -20,7 +20,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 9. [Docker - Criando Imagens - Commit](#workshop-docker-imagecreation-commit)
 10. [Docker - Criando Imagens - DockerFile](#workshop-docker-imagecreation-dockerfile)
 11. [Docker - Tag](#workshop-docker-tag)
-12. [Docker - Registro de Containers](#workshop-docker-registry)
+12. [Docker - Container Registry](#workshop-docker-registry)
 
 ## Implementação
 
@@ -446,7 +446,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   ```
     * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
-  Sintaxe: `docker kill 27fe9eed1b7c`
+  Sintaxe: `docker kill $CONTAINER_ID`
   ```
   27fe9eed1b7c
   ```
@@ -476,6 +476,7 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
   http :80
   http: error: ConnectionError: HTTPConnectionPool(host='localhost', port=80): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1107af7c0>: Failed to establish a new connection: [Errno 61] Connection refused')) while doing a GET request to URL: http://localhost:80/
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
 
   ```
   docker run -it -p 8080:80 httpd:2.4.46
@@ -494,3 +495,154 @@ Neste repositório estarão disponíveis nosso *Workshop* de implementação faz
 
   <html><body><h1>It works!</h1></body></html>
   ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 7. Docker - Acesso "Remoto" <a name="#workshop-docker-remote">
+
+  Sintaxe:
+  ```
+  docker run -it -p 8080:80 httpd:2.4.46
+
+  docker ps                                                           vinny@marcfleury
+  CONTAINER ID   IMAGE          COMMAND              CREATED         STATUS         PORTS                  NAMES
+  3029db0ca30b   httpd:2.4.46   "httpd-foreground"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp   inspiring_merkle
+
+  docker exec -it $CONTAINER_ID bash
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 8. Docker - Persistência <a name="#workshop-docker-persistence">
+
+  Sintaxe:
+  ```
+  docker run -it -p 8080:80 httpd:2.4.46
+
+  docker ps                                                           vinny@marcfleury
+  CONTAINER ID   IMAGE          COMMAND              CREATED         STATUS         PORTS                  NAMES
+  3029db0ca30b   httpd:2.4.46   "httpd-foreground"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp   inspiring_merkle
+
+  docker exec -it $CONTAINER_ID bash
+  apt-get update
+  apt-get install vim
+  vim /usr/local/apache2/htdocs/index.html
+
+  http :8080
+
+  docker ps                                                           vinny@marcfleury
+  CONTAINER ID   IMAGE          COMMAND              CREATED         STATUS         PORTS                  NAMES
+  3029db0ca30b   httpd:2.4.46   "httpd-foreground"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp   inspiring_merkle
+
+  docker stop $CONTAINER_ID
+
+  docker run -it -p 8080:80 httpd:2.4.46
+
+  http :8080
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+  ```
+  docker run -it -p 8080:80 -v "$PWD"/docker/volume/:/usr/local/apache2/htdocs/ httpd:2.4.46
+
+  http :8080
+  HTTP/1.1 200 OK
+  Accept-Ranges: bytes
+  Connection: Keep-Alive
+  Content-Length: 56
+  Content-Type: text/html
+  Date: Wed, 27 Jan 2021 23:14:01 GMT
+  ETag: "38-5b9e9df6ddba6"
+  Keep-Alive: timeout=5, max=100
+  Last-Modified: Wed, 27 Jan 2021 23:10:10 GMT
+  Server: Apache/2.4.46 (Unix)
+
+  <html><body><h1>Funcionou com volume</h1></body></html>
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 9. Docker - Criando Imagens - Commit <a name="#workshop-docker-imagecreation-commit">
+
+  ```
+  docker run -it -p 8080:80 httpd:2.4.46
+
+  docker ps                                                           vinny@marcfleury
+  CONTAINER ID   IMAGE          COMMAND              CREATED         STATUS         PORTS                  NAMES
+  3029db0ca30b   httpd:2.4.46   "httpd-foreground"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp   inspiring_merkle
+
+  docker exec -it $CONTAINER_ID bash
+  apt-get update
+  apt-get install vim
+  vim /usr/local/apache2/htdocs/index.html
+    <html><body>
+    <h1>Funcionou com volume</h1>
+    <h1>Teste com Commit</h1>
+    </body></html>
+
+  docker ps
+  docker commit $CONTAINER_ID viniciusmartinez/my-custom-httpd:1.0
+  docker images
+
+  docker run -it -p 8080:80 viniciusmartinez/my-custom-httpd:1.0
+
+  http :8080
+  HTTP/1.1 200 OK
+  Accept-Ranges: bytes
+  Connection: Keep-Alive
+  Content-Length: 98
+  Content-Type: text/html
+  Date: Wed, 27 Jan 2021 23:42:02 GMT
+  ETag: "62-5b9ea3b9a3140"
+  Keep-Alive: timeout=5, max=100
+  Last-Modified: Wed, 27 Jan 2021 23:35:57 GMT
+  Server: Apache/2.4.46 (Unix)
+
+  <html><body>
+    <h1>Funcionou com volume</h1>
+    <h1>Teste com Commit</h1>
+    </body></html>
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 10. Docker - Criando Imagens - DockerFile <a name="#workshop-docker-imagecreation-dockerfile">
+
+  Sintaxe:
+  ```
+  docker build -f docker/my-custom-httpd.v2/Dockerfile.mycustomhttpd.v2 -t viniciusmartinez/my-custom-httpd:2.0 .`
+  docker run -it -p 9090:9090 viniciusmartinez/my-custom-httpd:2.0
+
+  http :9090
+  HTTP/1.1 200 OK
+  Accept-Ranges: bytes
+  Connection: Keep-Alive
+  Content-Length: 45
+  Content-Type: text/html
+  Date: Thu, 28 Jan 2021 00:31:43 GMT
+  ETag: "2d-432a5e4a73a80"
+  Keep-Alive: timeout=5, max=100
+  Last-Modified: Mon, 11 Jun 2007 18:53:14 GMT
+  Server: Apache/2.4.46 (Unix)
+
+  <html><body><h1>It works!</h1></body></html>
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 11. Docker - Tag <a name="#workshop-docker-tag">
+
+  Sintaxe: `docker tag viniciusmartinez/my-custom-httpd:2.0 impacta/custom-http:1.0`
+  ```
+  docker images
+  REPOSITORY                         TAG       IMAGE ID       CREATED          SIZE
+  impacta/custom-http                1.0       738c55b4bb8d   9 minutes ago    189MB
+  viniciusmartinez/my-custom-httpd   2.0       738c55b4bb8d   9 minutes ago    189MB
+  viniciusmartinez/my-custom-httpd   1.0       1b94bbf03a1b   56 minutes ago   189MB
+  httpd                              2.4.46    683a7aad17d3   2 weeks ago      138MB
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
+
+### 12. Docker - Container Registry <a name="#workshop-docker-registry">
+
+  Sintaxe:
+  ```
+  docker login -u LOGIN -p PASSWORD
+  docker push $repository/my-custom-httpd:2.0
+  ```
+    * o *output* pode variar variar ligeiramente do apresentando anteriormente observando as características do seu ambiente e/ou versão da imagem
